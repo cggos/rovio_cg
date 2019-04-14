@@ -1,0 +1,4 @@
+## Measurement Timing
+Rovio can handle arbitrary timing of the different measurements (e.g. IMU, images) as long as their timestamps are consistent with each other (they must be expressed with respect to the same clock). There are a couple of limitations:
+* The measurements of each data source (e.g. IMU measurements) must be provided chronologously.
+* There is a maximal time rovio is waiting for a certain measurement (except for the IMU, 0.1 seconds by default for all others). After that rovio will continue estimation without the measurement. If a measurement should arrive too late a warning will be printed. This waiting time could be adapted by setting maxWaitTime_ of the specific MeasurementTimeline in RovioFilter to a different value.

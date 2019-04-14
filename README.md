@@ -1,12 +1,17 @@
 # rovio_cg
 
-Modified version of **[ROVIO](https://github.com/ethz-asl/rovio)** (commit 3389c2a  on Dec 19, 2017).
+Modified version of ROVIO (commit 3389c2a  on Dec 19, 2017).
+
+* **[ROVIO](https://github.com/ethz-asl/rovio)**: Robust Visual Inertial Odometry
+* Papers
+  - *Robust Visual Inertial Odometry Using a Direct EKF-Based Approach*
+  - *Iterated extended Kalman filter based visual-inertial odometry using direct photometric feedback*
 
 # Install & Build
 
-1. install **[kindr](https://github.com/ethz-asl/kindr)**
+1. install **[kindr](https://github.com/ethz-asl/kindr)** (Kinematics and Dynamics for Robotics)
 
-2. download the project and its dependency **lightweight_filtering**
+2. download the project and its dependency **[lightweight_filtering](https://bitbucket.org/bloesch/lightweight_filtering)** which provides basic functionalities for implementing EKF and UKF filters
     ```sh
     mkdir -p ws_rovio/src
     cd ws_rovio/src
