@@ -41,9 +41,15 @@ Modified version of ROVIO (commit 3389c2a  on Dec 19, 2017).
 
 * with Euroc Datasets
   ```sh
-  roslaunch rovio rovio_node.launch [rviz:=true]
+  roslaunch rovio rovio_node_euroc.launch [rviz:=true]
   rosbag play MH_01_easy.bag
   ```
+
+* with MYNTEYE-S1030
+  ```sh
+  roslaunch rovio rovio_node_mynteye.launch [rviz:=true]
+  ```
+  ![](images/run_mynteye_s1030.jpg)
 
 # Notes
 
