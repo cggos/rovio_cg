@@ -44,6 +44,7 @@
 #include <sensor_msgs/image_encodings.h>
 #include <sensor_msgs/Imu.h>
 #include <sensor_msgs/PointCloud2.h>
+#include <nav_msgs/Path.h>
 #include <std_srvs/Empty.h>
 #include <tf/transform_broadcaster.h>
 #include <visualization_msgs/Marker.h>
@@ -140,6 +141,7 @@ class RovioNode{
   ros::Publisher pubTransform_;
   ros::Publisher pubPoseWithCovStamped_;
   ros::Publisher pub_T_J_W_transform;
+  ros::Publisher pubPath_;
   tf::TransformBroadcaster tb_;
   ros::Publisher pubPcl_;            /**<Publisher: Ros point cloud, visualizing the landmarks.*/
   ros::Publisher pubPatch_;            /**<Publisher: Patch data.*/
@@ -157,6 +159,7 @@ class RovioNode{
   sensor_msgs::PointCloud2 patchMsg_;
   visualization_msgs::Marker markerMsg_;
   sensor_msgs::Imu imuBiasMsg_;
+  nav_msgs::Path pathMsg_;
   int msgSeq_;
 
   // Rovio outputs and coordinate transformations
@@ -231,6 +234,8 @@ class RovioNode{
     pubPatch_ = nh_.advertise<sensor_msgs::PointCloud2>("rovio/patch", 1);
     pubMarkers_ = nh_.advertise<visualization_msgs::Marker>("rovio/markers", 1 );
 
+    pubPath_ = nh.advertise<nav_msgs::Path>("rovio/path", 1);
+
     pub_T_J_W_transform = nh_.advertise<geometry_msgs::TransformStamped>("rovio/T_G_W", 1);
     for(int camID=0;camID<mtState::nCam_;camID++){
       pubExtrinsics_[camID] = nh_.advertise<geometry_msgs::PoseWithCovarianceStamped>("rovio/extrinsics" + std::to_string(camID), 1 );
@@ -256,6 +261,9 @@ class RovioNode{
 
     odometryMsg_.header.frame_id = world_frame_;
     odometryMsg_.child_frame_id = imu_frame_;
+
+    pathMsg_.header.frame_id = world_frame_;
+
     msgSeq_ = 1;
     for(int camID=0;camID<mtState::nCam_;camID++){
       extrinsicsMsg_[camID].header.frame_id = imu_frame_;
@@ -762,6 +770,17 @@ class RovioNode{
             }
           }
           pubOdometry_.publish(odometryMsg_);
+
+          // Publish the path
+          geometry_msgs::PoseStamped pose_stamped;
+          pose_stamped.header.seq = msgSeq_;
+          pose_stamped.header.stamp = ros::Time(mpFilter_->safe_.t_);
+          pose_stamped.pose = odometryMsg_.pose.pose;
+
+          pathMsg_.header.seq = msgSeq_;
+          pathMsg_.header.stamp = ros::Time(mpFilter_->safe_.t_);
+          pathMsg_.poses.push_back(pose_stamped);
+          pubPath_.publish(pathMsg_);
         }
 
         if(pubPoseWithCovStamped_.getNumSubscribers() > 0 || forcePoseWithCovariancePublishing_){
