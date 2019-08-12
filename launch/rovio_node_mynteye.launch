@@ -8,7 +8,7 @@
   </group>
 
   <node pkg="rovio" type="rovio_node" name="rovio" output="screen">
-    <param name="filter_config"   value="$(find rovio)/cfg/rovio_mynteye.info"/>
+    <param name="filter_config"   value="$(find rovio)/cfg/rovio_mynteye_s1030.info"/>
     <param name="camera0_config"  value="$(find rovio)/cfg/mynteye_s1030_cam0.yaml"/>
     <param name="camera1_config"  value="$(find rovio)/cfg/mynteye_s1030_cam1.yaml"/>
     <param name="imu_topic_name"  value="/mynteye/imu/data_raw"/>
