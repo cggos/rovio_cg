@@ -7,44 +7,43 @@ Modified version of ROVIO (commit 3389c2a  on Dec 19, 2017).
   - *Robust Visual Inertial Odometry Using a Direct EKF-Based Approach*
   - *Iterated extended Kalman filter based visual-inertial odometry using direct photometric feedback*
 
-# Install & Build
+# Dependencies
 
-1. install **[kindr](https://github.com/ethz-asl/kindr)** (Kinematics and Dynamics for Robotics)
+* **[kindr](https://github.com/ethz-asl/kindr)** (Kinematics and Dynamics for Robotics)
 
-2. download the project and its dependency **[lightweight_filtering](https://bitbucket.org/bloesch/lightweight_filtering)** which provides basic functionalities for implementing EKF and UKF filters
-    ```sh
-    mkdir -p ws_rovio/src
-    cd ws_rovio/src
-    git clone https://github.com/cggos/rovio_cg.git
-    cd ..
-    wstool init ./ rovio_cg/dependencies.rosinstall # lightweight_filtering
-    ```
-3. build
+* **[lightweight_filtering](https://bitbucket.org/bloesch/lightweight_filtering)**: provides basic functionalities for implementing EKF and UKF filters
+  ```sh
+  mkdir -p ws_rovio/src
+  cd ws_rovio/src
+  git clone https://github.com/cggos/rovio_cg.git
+  wstool init ./ rovio_cg/dependencies.rosinstall # lightweight_filtering
+  ```
 
-   without opengl scene
-   ```sh
-   catkin build rovio --cmake-args -DCMAKE_BUILD_TYPE=Release
-   # or
-   catkin_make -DCMAKE_BUILD_TYPE=Release -j2
-   ```
+# Build
 
-   with opengl scene
-   ```sh
-   sudo apt install freeglut3-dev, sudo apt-get install libglew-dev # dependencies
+* without opengl scene
+  ```sh
+  catkin build rovio --cmake-args -DCMAKE_BUILD_TYPE=Release
+  # or
+  catkin_make -DCMAKE_BUILD_TYPE=Release -j2
+  ```
 
-   catkin build rovio --cmake-args -DCMAKE_BUILD_TYPE=Release -DMAKE_SCENE=ON
-   # or
-   catkin_make -DCMAKE_BUILD_TYPE=Release -j2 -DMAKE_SCENE=ON
-   ```
+* with opengl scene
+  ```sh
+  sudo apt install freeglut3-dev libglew-dev # dependencies
+
+  catkin build rovio --cmake-args -DCMAKE_BUILD_TYPE=Release -DMAKE_SCENE=ON
+  # or
+  catkin_make -DCMAKE_BUILD_TYPE=Release -j2 -DMAKE_SCENE=ON
+  ```
 
 # Run
 
-## with Euroc Datasets
-
-```sh
-roslaunch rovio rovio_node.launch [rviz:=true]
-rosbag play MH_01_easy.bag
-```
+* with Euroc Datasets
+  ```sh
+  roslaunch rovio rovio_node.launch [rviz:=true]
+  rosbag play MH_01_easy.bag
+  ```
 
 # Notes
 
