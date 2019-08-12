@@ -1,0 +1,23 @@
+#include "/home/cg/projects/ws_rovio/src/rovio_cg/cfg/rovio.info"
+Camera0
+{
+	CalibrationFile ;												Camera-Calibration file for intrinsics
+	qCM_x  0.003031;										        X-entry of IMU to Camera quaterion (Hamilton)
+	qCM_y  -0.0004258;										        Y-entry of IMU to Camera quaterion (Hamilton)
+	qCM_z  -0.7070174;										      	Z-entry of IMU to Camera quaterion (Hamilton)
+	qCM_w   0.7071895;										     	W-entry of IMU to Camera quaterion (Hamilton)
+	MrMC_x 0.04399491236358173;										X-entry of IMU to Camera vector (expressed in IMU CF) [m]
+	MrMC_y 0.003574658199448571;									Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
+	MrMC_z -0.02391335355253343;									Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
+}
+Camera1
+{
+	CalibrationFile ;												Camera-Calibration file for intrinsics
+	qCM_x  0.0036353;										        X-entry of IMU to Camera quaterion (Hamilton)
+	qCM_y  -0.0055239;										        Y-entry of IMU to Camera quaterion (Hamilton)
+	qCM_z  -0.7075645;										    	Z-entry of IMU to Camera quaterion (Hamilton)
+	qCM_w  0.7066178;											    W-entry of IMU to Camera quaterion (Hamilton)
+	MrMC_x -0.07587403543051402;									X-entry of IMU to Camera vector (expressed in IMU CF) [m]
+	MrMC_y 0.003874473915850829;							        Y-entry of IMU to Camera vector (expressed in IMU CF) [m]
+	MrMC_z -0.024023615450020193;									Z-entry of IMU to Camera vector (expressed in IMU CF) [m]
+}
